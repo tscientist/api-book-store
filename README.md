@@ -9,9 +9,9 @@
 {{url}} => http://localhost:8000
 
 
-##**API endpoints**
+ ##**API endpoints**
 
-####````  {{url}}/books -> ````  
+ ####````  {{url}}/books -> ````  
 
 POST Show - This route is used to display all registered books with a message of success.
 
@@ -127,7 +127,7 @@ Response:
         }
     }
     
-####````{{url}}/books/:id ->````
+ ####````{{url}}/books/:id ->````
 
 GET Delete book - Find a book through the id informed as a parameter and delete it. Returns a message of success.
 
