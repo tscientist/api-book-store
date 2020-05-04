@@ -1,4 +1,4 @@
-const DB_URI = 'mongodb://admin:admin12@ds233278.mlab.com:33278/workshopnodejs2019';
+const DB_URI = '';
 
 module.exports = {
     connect: () => {
