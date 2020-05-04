@@ -6,12 +6,16 @@
 - run ```npm start``` - Starting the server (port 8000)
 - run ```npm test``` - Running automated tests - To run the tests you need to have the API running on port 8000.
 
+
 {{url}} => http://localhost:8000
 
 
- ##**API endpoints**
 
- ####````  {{url}}/books -> ````  
+ **API endpoints**
+ 
+
+ ````  {{url}}/books -> ````  
+ 
 
 POST Show - This route is used to display all registered books with a message of success.
 
@@ -44,8 +48,11 @@ Response:
           }
       ]
     }
+    
+    
+    
   
-####````  {{url}}/books -> ````  
+````  {{url}}/books -> ````  
 
 POST Create - This route is used to create a new book, the book data must be informed and in result the route will
 return the new book with a message of success.
@@ -93,8 +100,11 @@ Response:
             "__v": 0
         }
     }
+    
+    
+    
 
-####````{{url}}/books/:id -> ````
+````{{url}}/books/:id -> ````
         
 PUT Update - The request must contain at least one of the attributes of Book and a valid book id entered as a parameter. The update function um verify witch one is and replace then. Returns information from the modified book and a message of success.
 
@@ -127,7 +137,10 @@ Response:
         }
     }
     
- ####````{{url}}/books/:id ->````
+    
+   
+    
+````{{url}}/books/:id ->````
 
 GET Delete book - Find a book through the id informed as a parameter and delete it. Returns a message of success.
 
