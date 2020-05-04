@@ -1,8 +1,10 @@
 const router = express.Router();
 var booksModel = require("../models/bookModel");
 
-router.get('/', (req, res) => {    
-    //Crie aqui a função para listar todos os livros cadastrados na estrutura (models/bookModel) do mongodb 
+/**
+ * Crie aqui a função para listar todos os livros cadastrados na estrutura (models/bookModel) do mongodb
+ */
+router.get('/', (req, res) => {
     booksModel.find(function (err, books) {
         if  (err)
             return res.send(err);
@@ -14,6 +16,24 @@ router.get('/', (req, res) => {
         // }, [ books])
     })
 })
+
+/**
+ * Crie aqui a função para cadastrar os dados de um livro
+ */
+router.post('/', (req, res) => {
+    const book = new booksModel(req.body)
+
+    book.save()
+        .then(book => {
+            return res.json(book)
+        })
+        .catch(err => {
+            res.status(500).json({msg: 'Sorry, internal server errors'})
+            console.log(err)
+            return;
+        })
+})
+
 /**
  * Crie aqui a função para atualizar os dados de um livro com base no id do mesmo
  */
@@ -50,24 +70,9 @@ router.put('/:id', (req, res) => {
 })
 
 /**
- * Crie aqui a função para cadastrar os dados de um livro
+ * Crie aqui a função para remover os dados de um livro
  */
-router.post('/', (req, res) => {
-    const book = new booksModel(req.body)
-
-    book.save()
-        .then(book => {
-            return res.json(book)
-        })
-        .catch(err => {
-            res.status(500).json({msg: 'Sorry, internal server errors'})
-            console.log(err)
-            return;
-        })
-})
-
-router.delete('/delete/:id', (req, res) => {
-    //Crie aqui a função para remover os dados de um livro
+router.delete('/:id', (req, res) => {
     booksModel.deleteOne({
         _id: req.params.id
     }, function(error) {
