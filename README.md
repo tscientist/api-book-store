@@ -2,11 +2,12 @@
 
 **Installation**
 - clone this repository
-- run ```npm install``` Install dependencies
-- run ```npm start``` Starting the server (port 8000)
-- run ```npm test``` Running automated tests - To run the tests you need to have the API running on port 3000.
+- run ```npm install``` - Install dependencies
+- run ```npm start``` - Starting the server (port 8000)
+- run ```npm test``` - Running automated tests - To run the tests you need to have the API running on port 8000.
 
-The domain for the endpoints call is: http://localhost:8000
+{{url}} => http://localhost:8000
+
 
 ##**API endpoints**
 
