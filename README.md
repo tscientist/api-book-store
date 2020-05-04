@@ -14,10 +14,10 @@
  **API endpoints**
  
 
- ````  {{url}}/books -> ````  
+ ````  {{url}}/books -> GET Show books ````  
  
 
-POST Show - This route is used to display all registered books with a message of success.
+This route is used to display all registered books with a message of success.
 
 Response:
     
@@ -52,9 +52,9 @@ Response:
     
     
   
-````  {{url}}/books -> ````  
+````  {{url}}/books -> POST Create book````  
 
-POST Create - This route is used to create a new book, the book data must be informed and in result the route will
+This route is used to create a new book, the book data must be informed and in result the route will
 return the new book with a message of success.
 
 HEADERS
@@ -104,9 +104,9 @@ Response:
     
     
 
-````{{url}}/books/:id -> ````
+````{{url}}/books/:id -> PUT Update book````
         
-PUT Update - The request must contain at least one of the attributes of Book and a valid book id entered as a parameter. The update function um verify witch one is and replace then. Returns information from the modified book and a message of success.
+The request must contain at least one of the attributes of Book and a valid book id entered as a parameter. The update function um verify witch one is and replace then. Returns information from the modified book and a message of success.
 
 HEADERS
 Content-Type    application/json
@@ -140,9 +140,9 @@ Response:
     
    
     
-````{{url}}/books/:id ->````
+````{{url}}/books/:id -> GET Delete book ````
 
-GET Delete book - Find a book through the id informed as a parameter and delete it. Returns a message of success.
+Find a book through the id informed as a parameter and delete it. Returns a message of success.
 
 HEADERS
 id    String
