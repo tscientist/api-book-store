@@ -6,14 +6,18 @@ var booksModel = require("../models/bookModel");
  */
 router.get('/', (req, res) => {
     booksModel.find(function (err, books) {
-        if  (err)
-            return res.send(err);
+        if  (err){
+            res.json({
+                Success: false,
+                error: 'Desculpe, erro do servidor'
+            })
+            console.log(err)
+        }
 
-        res.json(books);
-        // res.json({
-        //     success: true,
-        //     books: ""
-        // }, [ books])
+        res.json({
+            success: true,
+            books
+        })
     })
 })
 
@@ -25,10 +29,17 @@ router.post('/', (req, res) => {
 
     book.save()
         .then(book => {
-            return res.json(book)
+            return res.json({
+                Success: true,
+                Message: 'Livro cadastrado com sucesso',
+                book
+            })
         })
         .catch(err => {
-            res.status(500).json({msg: 'Sorry, internal server errors'})
+            res.json({
+                Success: false,
+                error: 'Desculpe, erro do servidor'
+            })
             console.log(err)
             return;
         })
@@ -61,11 +72,20 @@ router.put('/:id', (req, res) => {
                 if (err)
                     res.send(err)
 
-                res.json({ message: 'book updated!' });
+                return res.json({
+                    Success: true,
+                    Message: 'Livro editado com sucesso',
+                    book
+                })
             })
         })
         .catch((err) => {
-            return res.json(err)
+            res.json({
+                Success: false,
+                error: 'Desculpe, erro do servidor'
+            })
+            console.log(err)
+            return;
         })
 })
 
@@ -75,11 +95,18 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     booksModel.deleteOne({
         _id: req.params.id
-    }, function(error) {
-        if(error)
-            res.send(error);
-
-        res.json({ message: 'Usuário excluído com Sucesso! '});
+    }, function(err) {
+        if  (err) {
+            res.status(500).json({
+                Success: false,
+                error: 'Desculpe, erro do servidor'
+            })
+            console.log(err)
+        }
+        return res.json({
+            Success: true,
+            Message: 'Livro removido com sucesso',
+        })
     });
 })
 

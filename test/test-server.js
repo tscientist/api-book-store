@@ -1,11 +1,8 @@
 const expect  = require('chai').expect;
-const request = require('request');
 const chai = require('chai');
 const chaiHTTP = require('chai-http');
 chai.use(chaiHTTP);
-var mongoose = require('mongoose')
 var assert = require('assert');
-
 
 const baseUrl = 'http://localhost:8000';
 
