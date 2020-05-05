@@ -48,9 +48,16 @@ Response:
           }
       ]
     }
+
+If any field is sent null or in the wrong format, the book will not be registered and an error message will be displayed     
+        
+    {
+        "Success": false,
+        "error": "Você deixou algum campo vazio ou passou alguma informação no formato errado"
+    }
     
-    
-    
+  
+  
   
 ````  {{url}}/books -> POST Create book````  
 
@@ -136,8 +143,18 @@ Response:
             "__v": 0
         }
     }
+
+
+Will display an error message if the user enters an invalid attribute to be updated and status 400.
+
     
+    {
+      "error": "Você não informou um campo válido"
+    }
     
+    {
+        "error": "Atributo(s) informados no formato errado"
+    }
    
     
 ````{{url}}/books/:id -> GET Delete book ````
