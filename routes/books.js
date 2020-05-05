@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
         .catch(err => {
             res.json({
                 Success: false,
-                error: 'Desculpe, erro do servidor'
+                error: 'Você deixou algum campo vazio ou passou alguma informação no formato errado'
             })
             console.log(err)
             return;
@@ -49,6 +49,8 @@ router.post('/', (req, res) => {
  * Crie aqui a função para atualizar os dados de um livro com base no id do mesmo
  */
 router.put('/:id', (req, res) => {
+    let error = true
+
     booksModel.findOne({
         _id: req.params.id
     })
@@ -64,28 +66,37 @@ router.put('/:id', (req, res) => {
             ];
 
             for (param in req.body) {
-                if (allowedParams.includes(param))
+                if (allowedParams.includes(param)) {
                     book[param] = req.body[param]
+                    error = false;
+                }
+            }
+            if (error){
+                return res.status(400).json({
+                    error: 'Você não informou um campo válido'
+                })
             }
 
-            book.save(function (err) {
-                if (err)
-                    res.send(err)
-
-                return res.json({
-                    Success: true,
-                    Message: 'Livro editado com sucesso',
-                    book
+            book.save()
+                .then(book => {
+                    return res.json({
+                        Success: true,
+                        Message: 'Livro editado com sucesso',
+                        book
+                    })
                 })
-            })
+                .catch((err) => {
+                    console.log(err)
+                    return res.json({
+                        error: 'Atributo(s) informado(s) no formato errado'
+                    })
+                })
         })
         .catch((err) => {
-            res.json({
-                Success: false,
+            return res.json({
                 error: 'Desculpe, erro do servidor'
             })
-            console.log(err)
-            return;
+
         })
 })
 
