@@ -11,12 +11,11 @@ it('Should show all books on /books GET', done => {
             .get('/books')
             .end(function (err, res) {
             expect(res.statusCode).to.equal(200);
-            expect(res).to.not.have.property('a');
             done();
         });
 })
 
-it('Should create baseUrl new book on /books POST', done => {
+it('Should create new book on /books POST', done => {
     chai.request(baseUrl)
         .post('/books')
         .send({
@@ -31,14 +30,37 @@ it('Should create baseUrl new book on /books POST', done => {
         .set('Content-Type', 'application/json')
         .end(function (err, res) {
             expect(res.statusCode).to.equal(200);
-            expect(res).to.not.have.property('a');
+            expect(res.body).to.have.property('Message');
+            expect(res.body).to.have.property('book');
+            expect(res.body.Success).to.be.equals(true);
+            done();
+        });
+
+})
+
+it('Should not create a new book on /books POST - Missing field', done => {
+    chai.request(baseUrl)
+        .post('/books')
+        .send({
+            "title": "Crepusculo",
+            "category": "romance",
+            "pageCount": 200,
+            "thumbnailUrl": "www.crepusculo-foto.com",
+            "shortDescription": "romance menina vampiro lobo",
+            "longDescription": "descrição longa"
+        })
+        .set('Content-Type', 'application/json')
+        .end(function (err, res) {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body).to.have.property('error');
+            expect(res.body.Success).to.be.equals(false);
             done();
         });
 
 })
 
 it('Should update an existing book on /books/:id PUT', done => {
-    let id = '5bec08080ed7b42b4ccd1e53';
+    let id = '5e6b7f991d745d47acfa70a8';
 
     chai.request(baseUrl)
         .put(`/books/${id}`)
@@ -49,19 +71,55 @@ it('Should update an existing book on /books/:id PUT', done => {
         })
         .set('Content-Type', 'application/json')
         .end(function (err, res) {
+            expect(res.body).to.have.property('Message');
+            expect(res.body).to.have.property('book');
+            expect(res.body.Success).to.be.equals(true);
+            done();
+        });
+});
+
+it('Should not update an existing book on /books/:id PUT - Wrong attribute format', done => {
+    let id = '5e6b7f991d745d47acfa70a8';
+
+    chai.request(baseUrl)
+        .put(`/books/${id}`)
+        .send({
+            "title": "O Hobbit",
+            "pageCount": "carol",
+            "shortDescription": "an unexpected journey"
+        })
+        .set('Content-Type', 'application/json')
+        .end(function (err, res) {
             expect(res.statusCode).to.equal(200);
-            expect(res).to.not.have.property('a');
+            expect(res.body).to.have.property('error');
+            done();
+        });
+});
+
+it('Should not update an existing book on /books/:id PUT - Invalid Field', done => {
+    let id = '5e6b7f991d745d47acfa70a8';
+
+    chai.request(baseUrl)
+        .put(`/books/${id}`)
+        .send({
+            "author": "O Hobbit",
+            "pageCount": "carol",
+            "shortDescription": "an unexpected journey"
+        })
+        .set('Content-Type', 'application/json')
+        .end(function (err, res) {
+            expect(res.body).to.have.property('error');
             done();
         });
 });
 
 it('Should delete a book on /books/:id DELETE', done => {
-    let id = '5eb080a4851faf3b7089b39b';
+    let id = '5eb09b29d230e86ad8560c53';
     chai.request(baseUrl)
         .delete(`/books/${id}`)
         .end(function (err, res) {
             expect(res.statusCode).to.equal(200);
-            expect(res).to.not.have.property('a');
+            expect(res.body).to.not.have.property('error');
             done();
         });
 });
