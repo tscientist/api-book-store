@@ -1,3 +1,74 @@
+# API Livraria Compasso
+API para pesquisar livros.
+
+URL: https://livraria-compasso.glitch.me/api
+
+### Corpo padrão de resposta
+```js
+{
+    "message": "string",        // Texto do código de retorno da requisição
+    "error": "boolean",         // Flag que indica se houve erro na requisição
+    "statusCode": "number",     // Código de retorno da requisição
+    "data": "array/Object"      // Conteúdo/dados da requisição
+}
+```
+
+## Pesquisar livros
+Retorna informações de livros de acordo com um termo de pesquisa.
+
+**metódo:** GET
+
+**path:** /search
+
+**parâmetros**:
+
+|tipo|parâmetro|obrigatório|descrição|
+|-|-|-|-|
+|string|term|sim|Texto utilizado na pesquisa.|
+|int|page|não|Página da pesquisa. Cada página possui 24 itens.|
+
+**resposta**:
+
+|tipo|propriedade|descrição|
+|-|-|-|
+|array|suggestions|Sugestões de pesquisas relacionadas ao termo pesquisado.|
+|array|books|Objetos com as informações dos livros pesquisados.|
+
+## Pesquisar um livro específico
+Retorna informações detalhadas de um livro.
+
+**metódo:** GET
+
+**path:** /book
+
+**parâmetros**:
+
+|tipo|parâmetro|obrigatório|descrição|
+|-|-|-|-|
+|string|id|sim|ID do livro.|
+
+**resposta**:
+
+|tipo|propriedade|descrição|
+|-|-|-|
+|string|id|ID|
+|string|name|Nome|
+|string|author|autor(a) ou autores(as)|
+|string|brand|Editora|
+|date|releaseDate|Data de lançamento|
+|array|categories|Categorias|
+|string|link|Link para a página web|
+|string|description|Descrição|
+
+
+
+
+
+
+
+
+
+
 # Backend test
 
 **Installation**
