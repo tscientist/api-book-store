@@ -1,4 +1,4 @@
-# Backend test
+# Book store
 
 **Installation**
 - clone this repository
